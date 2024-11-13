@@ -9,12 +9,15 @@ class GameHub(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Game Hub")
-        self.setWindowIcon(QIcon('waz.jpg'))
+        self.setWindowIcon(QIcon("icon_pic.jpg"))
 
         layout = QVBoxLayout()
         self.btn_snake = QPushButton("Snake Game")
+        self.btn_snake.setFixedSize(250,40)
         self.btn_dino = QPushButton("Dino Game")
+        self.btn_dino.setFixedSize(250,40)
         self.btn_ttt = QPushButton("Tic-Tac-Toe Game")
+        self.btn_ttt.setFixedSize(250,40)
 
         self.btn_snake.clicked.connect(self.open_snake_game)
         self.btn_dino.clicked.connect(self.open_dino_game)
