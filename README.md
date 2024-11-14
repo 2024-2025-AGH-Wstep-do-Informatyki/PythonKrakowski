@@ -1,5 +1,11 @@
 # 🐍 PyHUB 🐍
 
+## Spis Treści
+1. [📝 Opis Programu 📝](#opis-programu)
+2. [💻 Używane Technologie 💻](#używane-technologie)
+3. [🎮 Dostępne Gry 🎮](#dostępne-gry)
+4. [⚙️ Instrukcja Uruchamiania ⚙️](#instrukcja-uruchamiania)
+
 ## 📝 Opis Programu 📝
 
 Nasz projekt to hub z prostymi grami stworzonymi w Pythonie za pomocą PyQt5, gdzie głównym motywem jest wąż. Planowo każda gra w hubie będzie zawierać elementy związane z wężami, nawiązując do języka programowania Python.
