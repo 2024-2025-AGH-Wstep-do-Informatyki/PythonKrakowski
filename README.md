@@ -19,3 +19,43 @@ Nasz projekt to hub z prostymi grami stworzonymi w Pythonie za pomocą PyQt5, gd
 2. **Dino Snake 🦖🐍** – Alternatywa dla tradycyjnej gry Dino Game, gdzie dinozaur zostaje zastąpiony przez skaczącego węża, który musi unikać przeszkód w trakcie biegu. (Gra nie ma jeszcze grafik związanych z wężami)
 3. **Tic-Tac-Toe Snake 🐍⭕❌** – Gra w kółko i krzyżyk z motywem węża, gdzie plansza oraz symbole będą stylizowane na temat wężowy. (W chwili obecnej dostępna zwykła wersja)
 4. **Snake Minesweeper 🐍💣** – Wersja klasycznego Saper z nowym motywem: zamiast min, na planszy znajdują się węże! Celem gry jest odkrycie wszystkich bezpiecznych pól na planszy, unikając kontaktu z wężami.
+
+## ⚙️ Instrukcja Uruchamiania ⚙️
+
+Aby uruchomić hub gier w Pythonie z PyQt5, wykonaj poniższe kroki:
+
+#### 🐍 Krok 1: Zainstaluj Python 🐍
+
+Upewnij się, że masz zainstalowaną najnowszą wersję Pythona (3.x). Możesz ją pobrać ze strony [python.org](https://www.python.org/). Podczas instalacji upewnij się, że zaznaczyłeś opcję „Add Python to PATH”.
+
+#### 🖥️ Krok 2: Zainstaluj PyQt5 🖥️
+
+Projekt wymaga biblioteki PyQt5, która jest używana do tworzenia interfejsu użytkownika. Zainstaluj ją, uruchamiając następujące polecenie w terminalu:
+
+```bash
+pip install PyQt5
+```
+
+#### 📥 Krok 3: Pobierz pliki projektu 📥
+
+Pobierz pliki projektu na swój komputer. Projekt jest dostępny na GitHubie, więc możesz sklonować go przy użyciu:
+
+```bash
+git clone https://github.com/2024-2025-AGH-Wstep-do-Informatyki/PythonKrakowski.git
+```
+
+lub po prostu pobierz pliki i rozpakuj je w wybranym folderze.
+
+#### 🚀 Krok 4: Uruchom hub gier 🚀
+
+Przejdź do folderu projektu w terminalu, a następnie uruchom główny plik huba:
+
+```bash
+python game_hub.py
+```
+
+Główne okno huba otworzy się, a Ty będziesz mógł wybrać jedną z dostępnych gier.
+
+#### 🕹️ Krok 5: Wybierz grę 🕹️
+
+W oknie huba kliknij na nazwę gry, którą chcesz uruchomić. Każda gra otworzy się w osobnym oknie, a hub automatycznie zamknie się. Miłej rozgrywki! 🎉
