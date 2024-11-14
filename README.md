@@ -1,10 +1,10 @@
 # 🐍 PyHUB 🐍
 
 ## Spis Treści
-1. [📝 Opis Programu 📝](#opis-programu)
-2. [💻 Używane Technologie 💻](#używane-technologie)
-3. [🎮 Dostępne Gry 🎮](#dostępne-gry)
-4. [⚙️ Instrukcja Uruchamiania ⚙️](#instrukcja-uruchamiania)
+1. [📝 Opis Programu 📝](#📝-Opis-Programu-📝)
+2. [💻 Używane Technologie 💻](#💻-Używane-Technologie-💻)
+3. [🎮 Dostępne Gry 🎮](#🎮-Dostępne-Gry-🎮)
+4. [⚙️ Instrukcja Uruchamiania ⚙️](#⚙️-Instrukcja-Uruchamiania-⚙️)
 
 ## 📝 Opis Programu 📝
 
