@@ -5,6 +5,7 @@ from snake import SnakeGame
 from dino import DinoGame
 from tictactoe_game import TicTacToe
 from saper import SaperGame
+from hangman_game import HangmanGame
 
 class GameHub(QMainWindow):
     def __init__(self):
@@ -21,16 +22,20 @@ class GameHub(QMainWindow):
         self.btn_ttt.setFixedSize(250,40)
         self.btn_saper = QPushButton("Saper Game")
         self.btn_saper.setFixedSize(250,40)
+        self.btn_hangman = QPushButton("Hangman Game")
+        self.btn_hangman.setFixedSize(250,40)
 
         self.btn_snake.clicked.connect(self.open_snake_game)
         self.btn_dino.clicked.connect(self.open_dino_game)
         self.btn_ttt.clicked.connect(self.open_tictactoe_game)
         self.btn_saper.clicked.connect(self.open_saper_game)
+        self.btn_hangman.clicked.connect(self.open_hangman_game)
 
         layout.addWidget(self.btn_snake)
         layout.addWidget(self.btn_dino)
         layout.addWidget(self.btn_ttt)
         layout.addWidget(self.btn_saper)
+        layout.addWidget(self.btn_hangman)
 
         widget = QWidget()
         widget.setLayout(layout)
@@ -54,6 +59,11 @@ class GameHub(QMainWindow):
     def open_saper_game(self):
         self.Saper = SaperGame(self)
         self.Saper.show()
+        self.hide()
+
+    def open_hangman_game(self):
+        self.Hangman = HangmanGame(self)
+        self.Hangman.show()
         self.hide()
 
 if __name__ == "__main__":
