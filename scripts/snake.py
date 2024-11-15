@@ -1,7 +1,7 @@
 import sys
 import random
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from PyQt5.QtGui import QPainter, QBrush, QColor
+from PyQt5.QtGui import QPainter, QBrush, QColor, QIcon
 from PyQt5.QtCore import Qt, QTimer
 
 class SnakeGame(QMainWindow):
@@ -9,7 +9,7 @@ class SnakeGame(QMainWindow):
         super().__init__()
         
         self.hub_window = hub_window
-
+        self.setWindowIcon(QIcon("./assets/icon_pic.jpg"))
         self.init_game()
 
         self.timer = QTimer()

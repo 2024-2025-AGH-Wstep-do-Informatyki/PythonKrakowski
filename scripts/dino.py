@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from PyQt5.QtGui import QPainter, QColor, QBrush, QFont
+from PyQt5.QtGui import QPainter, QColor, QBrush, QFont, QIcon
 from PyQt5.QtCore import QTimer, Qt, QRect
 import random
 
@@ -12,7 +12,8 @@ class DinoGame(QMainWindow):
 
         self.setWindowTitle("Dino Game")
         self.setFixedSize(1000, 370)
-        
+        self.setWindowIcon(QIcon("./assets/icon_pic.jpg"))
+
         self.dino_x = 50
         self.dino_y = 300
         self.dino_width = 30

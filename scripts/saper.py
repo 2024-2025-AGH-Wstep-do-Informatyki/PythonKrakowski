@@ -9,6 +9,7 @@ class SaperGame(QWidget):
     def __init__(self, hub_window, rows=10, cols=10, num_snakes=10):
         super().__init__()
 
+        self.setWindowIcon(QIcon("./assets/icon_pic.jpg"))
         self.hub_window = hub_window
         self.rows = rows
         self.cols = cols

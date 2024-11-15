@@ -104,7 +104,7 @@ class TicTacToe(QMainWindow):
 
     def restart_ask(self):
         msg = QMessageBox()
-        msg.setWindowIcon(QIcon("icon_pic.jpg"))
+        msg.setWindowIcon(QIcon("./assets/icon_pic.jpg"))
         #msg.setIcon(QMessageBox.Question)
         msg.setWindowTitle("Koniec gry")
         msg.setText("Czy chcesz zagrać ponownie?")
