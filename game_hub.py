@@ -1,17 +1,17 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton
 from PyQt5.QtGui import QIcon
 import sys
-from snake import SnakeGame
-from dino import DinoGame
-from tictactoe_game import TicTacToe
-from saper import SaperGame
-from hangman_game import HangmanGame
+from scripts.snake import SnakeGame
+from scripts.dino import DinoGame
+from scripts.tictactoe_game import TicTacToe
+from scripts.saper import SaperGame
+from scripts.hangman_game import HangmanGame
 
 class GameHub(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Game Hub")
-        self.setWindowIcon(QIcon("icon_pic.jpg"))
+        self.setWindowIcon(QIcon("./assets/icon_pic.jpg"))
 
         layout = QVBoxLayout()
         self.btn_snake = QPushButton("Snake Game")
