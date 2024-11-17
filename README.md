@@ -6,6 +6,9 @@
 2. [💻 Używane Technologie 💻](#-Używane-Technologie-)
 3. [🎮 Dostępne Gry 🎮](#-Dostępne-Gry-)
 4. [⚙️ Instrukcja Uruchamiania ⚙️](#%EF%B8%8F-instrukcja-uruchamiania-%EF%B8%8F)
+5. [👨‍💻 Autorzy](#-autorzy-)
+6. [📜 Licencja](#-licencja-)
+
 
 ## 📝 Opis Programu 📝
 
@@ -67,3 +70,14 @@ Główne okno huba otworzy się, a Ty będziesz mógł wybrać jedną z dostępn
 #### 🕹️ Krok 5: Wybierz grę 🕹️
 
 W oknie huba kliknij na nazwę gry, którą chcesz uruchomić. Każda gra otworzy się w osobnym oknie, a hub automatycznie zamknie się. Miłej rozgrywki! 🎉
+
+## 👨‍💻 Autorzy 👨‍💻
+
+- **[Bartosz Pieczek](https://github.com/bpieczek)**
+- **[Zofia Ficek](https://github.com/zofiaficek)**
+- **[Mikołaj Mazur](https://github.com/marmag0)**
+- **[Arkadiusz Wzorek](https://github.com/awzorek)**
+
+## 📜 Licencja 📜
+
+Aplikacja jest na licencji MIT. Więcej informacji w pliku [LICENSE](LICENSE).
