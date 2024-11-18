@@ -6,6 +6,8 @@ from scripts.dino import DinoGame
 from scripts.tictactoe_game import TicTacToe
 from scripts.saper import SaperGame
 from scripts.hangman_game import HangmanGame
+from scripts.game2048 import Game2048
+from scripts.memory import MemoryGame
 
 class GameHub(QMainWindow):
     def __init__(self):
@@ -24,18 +26,26 @@ class GameHub(QMainWindow):
         self.btn_saper.setFixedSize(250,40)
         self.btn_hangman = QPushButton("Hangman Game")
         self.btn_hangman.setFixedSize(250,40)
+        self.btn_memory = QPushButton("Memory Game")
+        self.btn_hangman.setFixedSize(250,40)
+        self.btn_2048 = QPushButton("2048 Game")
+        self.btn_hangman.setFixedSize(250,40)
 
         self.btn_snake.clicked.connect(self.open_snake_game)
         self.btn_dino.clicked.connect(self.open_dino_game)
         self.btn_ttt.clicked.connect(self.open_tictactoe_game)
         self.btn_saper.clicked.connect(self.open_saper_game)
         self.btn_hangman.clicked.connect(self.open_hangman_game)
+        self.btn_memory.clicked.connect(self.open_memory_game)
+        self.btn_2048.clicked.connect(self.open_2048_game)
 
         layout.addWidget(self.btn_snake)
         layout.addWidget(self.btn_dino)
         layout.addWidget(self.btn_ttt)
         layout.addWidget(self.btn_saper)
         layout.addWidget(self.btn_hangman)
+        layout.addWidget(self.btn_memory)
+        layout.addWidget(self.btn_2048)
 
         widget = QWidget()
         widget.setLayout(layout)
@@ -64,6 +74,16 @@ class GameHub(QMainWindow):
     def open_hangman_game(self):
         self.Hangman = HangmanGame(self)
         self.Hangman.show()
+        self.hide()
+    
+    def open_memory_game(self):
+        self.Memory = MemoryGame(self)
+        self.Memory.show()
+        self.hide()
+
+    def open_2048_game(self):
+        self.game2048 = Game2048(self)
+        self.game2048.show()
         self.hide()
 
 if __name__ == "__main__":
