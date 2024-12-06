@@ -10,7 +10,7 @@ class TicTacToe(QMainWindow):
         self.hub_window = hub_window
         
         self.setWindowTitle("Kółko-krzyżyk")
-        self.setGeometry(800, 100, 300, 320)
+        self.setGeometry(750, 100, 300, 320)
         self.setWindowIcon(QIcon("./assets/icon_pic.jpg"))
 
         self.board = [['' for _ in range(3)] for _ in range(3)]                     #atrybuty gry: plansza, gracze, informacja o tym czy gra się zakończyła
