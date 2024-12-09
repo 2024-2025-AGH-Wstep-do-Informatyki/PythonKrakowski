@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget
 from PyQt5.QtGui import QPainter, QColor, QFont, QKeyEvent, QPixmap
 from PyQt5.QtCore import Qt, QTimer, QRect
+from PyQt5.QtMultimedia import QSound
 
 class PongGame(QMainWindow):
     def __init__(self):
@@ -47,6 +48,7 @@ class Canvas(QWidget):
         self.score1 = 0
         self.score2 = 0
         self.ball_image = QPixmap("./assets/icon_pic.jpg")
+        self.hit_sound = QSound("./assets/hit.wav")
 
     def initGame(self):
         self.ball_x = 380
@@ -103,8 +105,10 @@ class Canvas(QWidget):
 
             if self.ball_x <= self.paddle1_x + self.paddle_width and self.paddle1_y < self.ball_y < self.paddle1_y + self.paddle_height:
                 self.ball_dx = -self.ball_dx
+                self.hit_sound.play()
             if self.ball_x >= self.paddle2_x and self.paddle2_y < self.ball_y < self.paddle2_y + self.paddle_height:
                 self.ball_dx = -self.ball_dx
+                self.hit_sound.play()
 
             if self.ball_x < 0:
                 self.score2 += 1
