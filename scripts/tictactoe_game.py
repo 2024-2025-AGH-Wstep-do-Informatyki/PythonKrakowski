@@ -99,7 +99,6 @@ class TicTacToe(QMainWindow):
         else:
             self.info_label.setStyleSheet("color: red; font-size: 17px; font-weight: bold")
             self.info_label.setText(f"Gracz {winner} wygrał!")
-        
         self.restart_ask()                                                              #okno dialogowe z pytaniem, czy gracze chcą grać ponownie
 
     def restart_ask(self):
