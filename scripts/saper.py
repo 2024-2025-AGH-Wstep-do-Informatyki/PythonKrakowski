@@ -9,6 +9,7 @@ class SaperGame(QWidget):
     def __init__(self, hub_window, rows=10, cols=10, num_snakes=10):
         super().__init__()
 
+        #main windows setup
         self.setWindowIcon(QIcon("./assets/icon_pic.jpg"))
         self.hub_window = hub_window
         self.rows = rows
@@ -21,9 +22,11 @@ class SaperGame(QWidget):
         self.setWindowTitle("Saper z Wężami")
         self.setGeometry(100, 100, 400, 400)
 
+        #ui
         self.init_ui()
         self.generate_snakes()
 
+    #grid layout with buttons
     def init_ui(self):
         self.layout = QGridLayout()
         self.setLayout(self.layout)
@@ -40,6 +43,7 @@ class SaperGame(QWidget):
                 button_row.append(button)
             self.buttons.append(button_row)
 
+    #generate unque positions
     def generate_snakes(self):
         self.snakes.clear()
         while len(self.snakes) < self.num_snakes:
@@ -47,6 +51,7 @@ class SaperGame(QWidget):
             col = random.randint(0, self.cols - 1)
             self.snakes.add((row, col))
 
+    #restart and regenerate
     def reset_game(self):
         self.flagged.clear()
         self.revealed.clear()
@@ -59,6 +64,7 @@ class SaperGame(QWidget):
                 button.setText('')
                 button.setStyleSheet("")
 
+    #reveal
     def on_button_click(self):
         button = self.sender()
         pos = self.layout.getItemPosition(self.layout.indexOf(button))
@@ -75,6 +81,7 @@ class SaperGame(QWidget):
             self.reveal_cell(row, col)
             self.check_win()
 
+    #flag/unflag
     def on_right_click(self, pos):
         button = self.sender()
         button_pos = self.layout.getItemPosition(self.layout.indexOf(button))
@@ -90,6 +97,7 @@ class SaperGame(QWidget):
             button.setText('🚩')
             self.flagged.add((row, col))
 
+    #count adjacent snake cells
     def adjacent_snakes(self, row, col):
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
         count = 0
@@ -99,6 +107,7 @@ class SaperGame(QWidget):
                 count += 1
         return count
 
+    #cell reveal + check neighbour
     def reveal_cell(self, row, col):
         button = self.buttons[row][col]
         snake_count = self.adjacent_snakes(row, col)
@@ -120,12 +129,14 @@ class SaperGame(QWidget):
             button.setEnabled(False)
             self.revealed.add((row, col))
 
+    #check win condition
     def check_win(self):
         total_cells = self.rows * self.cols
         non_snake_cells = total_cells - self.num_snakes
         if len(self.revealed) == non_snake_cells:
             self.game_win()
 
+    #reveal snakes and diasble grid
     def game_over(self):
         for row in range(self.rows):
             for col in range(self.cols):
@@ -136,6 +147,7 @@ class SaperGame(QWidget):
                 button.setEnabled(False)
         self.show_restart_dialog("Przegrałeś! Chcesz zagrać jeszcze raz?")
 
+    #highlight snakes and disable grid
     def game_win(self):
         for row in range(self.rows):
             for col in range(self.cols):
@@ -146,6 +158,7 @@ class SaperGame(QWidget):
                 button.setEnabled(False)
         self.show_restart_dialog("Wygrałeś! Chcesz zagrać jeszcze raz?")
 
+    #dialog box to restar/exit game
     def show_restart_dialog(self, message):
         dialog = QMessageBox(self)
         dialog.setWindowTitle("Koniec gry")
@@ -160,6 +173,7 @@ class SaperGame(QWidget):
             self.close()
             self.hub_window.show()
 
+#run app
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     game = SaperGame(None)
