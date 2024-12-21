@@ -1,12 +1,8 @@
-from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QVBoxLayout, 
-    QWidget, QPushButton, QHBoxLayout, QMessageBox
-)
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget, QPushButton, QHBoxLayout, QHeaderView, QMessageBox
 from PyQt5.Qt import Qt
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QColor, QFontDatabase
 import random
 import sys
-
 
 class SudokuGame(QMainWindow):
     def __init__(self, return_to_hub_callback):
@@ -16,35 +12,52 @@ class SudokuGame(QMainWindow):
 
         self.return_to_hub_callback = return_to_hub_callback
         self.board = generate_sudoku()
+        self.solved_board = [row[:] for row in self.board]  
+        solve_sudoku(self.solved_board)  
         self.init_ui()
 
     def init_ui(self):
-        layout = QVBoxLayout()
+        central_widget = QWidget(self)
+        self.setCentralWidget(central_widget)
+
+        font_id = QFontDatabase.addApplicationFont("./assets/sudoku/SnakeChan.ttf")
+        snake_font = QFontDatabase.applicationFontFamilies(font_id)
+
+        main_layout = QVBoxLayout(central_widget)
 
         self.table = QTableWidget(9, 9)
-        self.table.setFont(QFont("Arial", 16))
-        self.table.setFixedSize(540, 540)
+        self.table.setFont(QFont(snake_font[0], 28))
+        self.table.setStyleSheet("QTableWidget { color: #31e00d; }") 
+        self.table.setEditTriggers(QTableWidget.AllEditTriggers)
+        main_layout.addWidget(self.table)
+
         self.table.horizontalHeader().setVisible(False)
         self.table.verticalHeader().setVisible(False)
-        self.table.setStyleSheet("gridline-color: black;")
+
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        button_layout = QHBoxLayout()
+
+        check_button = QPushButton("Sprawdź rozwiązanie", self)
+        check_button.clicked.connect(self.check_solution)
+        button_layout.addWidget(check_button)
+
+        new_game_button = QPushButton("Nowa zagadka", self)
+        new_game_button.clicked.connect(self.new_game)
+        button_layout.addWidget(new_game_button)
+
+        solve_button = QPushButton("Pokaż rozwiązanie", self)
+        solve_button.clicked.connect(self.show_solution)
+        button_layout.addWidget(solve_button)
+
+        back_button = QPushButton("Powrót do menu", self)
+        back_button.clicked.connect(self.return_to_hub)
+        button_layout.addWidget(back_button)
+
+        main_layout.addLayout(button_layout)
+
         self.load_board()
-
-        layout.addWidget(self.table)
-
-        # Buttons
-        buttons_layout = QHBoxLayout()
-        self.check_button = QPushButton("Sprawdź")
-        self.check_button.clicked.connect(self.check_solution)
-        self.return_button = QPushButton("Powrót do Huba")
-        self.return_button.clicked.connect(self.return_to_hub)
-
-        buttons_layout.addWidget(self.check_button)
-        buttons_layout.addWidget(self.return_button)
-        layout.addLayout(buttons_layout)
-
-        container = QWidget()
-        container.setLayout(layout)
-        self.setCentralWidget(container)
 
     def load_board(self):
         for i in range(9):
@@ -52,30 +65,68 @@ class SudokuGame(QMainWindow):
                 item = QTableWidgetItem()
                 if self.board[i][j] != 0:
                     item.setText(str(self.board[i][j]))
-                    item.setFlags(item.flags() & ~Qt.ItemIsEditable) 
+                    item.setFlags(item.flags() & ~Qt.ItemIsEditable)
+                else:
+                    item.setFlags(item.flags() | Qt.ItemIsEditable) 
+
+                item.setTextAlignment(Qt.AlignCenter)
                 self.table.setItem(i, j, item)
 
     def check_solution(self):
+        solved = True 
+        empty_found = False
+
         for row in range(9):
             for col in range(9):
                 item = self.table.item(row, col)
-                if item is None or not item.text().isdigit():
-                    self.show_message("Niepoprawne rozwiązanie! Puste pola lub brak liczb.")
-                    return
+                
+                num = int(item.text()) if item.text() != "" else 0
 
-                num = int(item.text())
-                if not is_valid(self.board, row, col, num):
-                    self.show_message("Niepoprawne rozwiązanie! Powtarzające się liczby.")
-                    return
+                if num == 0:
+                    empty_found = True 
+                if num != self.solved_board[row][col]: 
+                    item.setBackground(QColor("red")) 
+                    solved = False
+                else:
+                    item.setBackground(QColor("white")) 
 
-        self.show_message("Gratulacje! Rozwiązałeś Sudoku poprawnie.")
+        if empty_found:
+            self.show_message("Puste pole!", "Zostawiłeś puste pole. Wypełnij wszystkie komórki przed sprawdzeniem rozwiązania.")
+        elif solved:
+            self.show_message("Gratulacje!", "Rozwiązałeś sudoku poprawnie!")
+        else:
+            self.show_message("Błąd!", "Niektóre odpowiedzi są niepoprawne. Spróbuj ponownie.")
+
+    def show_message(self, title, text):
+        message_box = QMessageBox(self)
+        message_box.setWindowTitle(title)
+        message_box.setText(text)
+        message_box.setIcon(QMessageBox.Information if "Gratulacje" in title else QMessageBox.Critical)
+        message_box.exec_()
+
+    def new_game(self):
+        self.board = generate_sudoku()
+        self.solved_board = [row[:] for row in self.board]
+        solve_sudoku(self.solved_board) 
+        self.load_board()
+
+    def show_solution(self):
+        for i in range(9):
+            for j in range(9):
+                item = self.table.item(i, j)
+                if item is not None:
+                    
+                    if self.board[i][j] == 0:
+                        item.setText(str(self.solved_board[i][j])) 
+                        item.setFlags(item.flags() & ~Qt.ItemIsEditable) 
+                        item.setBackground(QColor("white"))
+                    else:
+                        item.setBackground(QColor("white"))
+
 
     def return_to_hub(self):
         self.close()
         self.return_to_hub_callback()
-
-    def show_message(self, message):
-        QMessageBox.information(self, "Sudoku", message)
 
 def generate_sudoku():
     board = [[0 for _ in range(9)] for _ in range(9)]

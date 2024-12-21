@@ -9,7 +9,6 @@
 5. [👨‍💻 Autorzy](#-autorzy-)
 6. [📜 Licencja](#-licencja-)
 
-
 ## 📝 Opis Programu 📝
 
 Nasz projekt to hub z prostymi grami stworzonymi w Pythonie za pomocą PyQt5, gdzie głównym motywem jest wąż. Planowo każda gra w hubie będzie zawierać elementy związane z wężami, nawiązując do języka programowania Python.
@@ -30,6 +29,10 @@ Nasz projekt to hub z prostymi grami stworzonymi w Pythonie za pomocą PyQt5, gd
 3. **Tic-Tac-Toe Snake 🐍⭕❌** – Gra w kółko i krzyżyk z motywem węża, gdzie plansza oraz symbole będą stylizowane na temat wężowy. (W chwili obecnej dostępna zwykła wersja)
 4. **Snake Minesweeper 🐍💣** – Wersja klasycznego Saper z nowym motywem: zamiast min, na planszy znajdują się węże! Celem gry jest odkrycie wszystkich bezpiecznych pól na planszy, unikając kontaktu z wężami.
 5. **Hangman Snake🐍💀🎯** – Gra w wisielca z motywem węża zamiast szubienicy: Po każdym nietrafionym strzale dorysowywane są kolejne części węża. Celem gry jest odgadnięcie słowa wylosowanego przez program (gra nie obsługuje słów z polskimi znakami)
+6. **Snake 2048 🐍🔢** – Klasyczna gra 2048. Celem jest uzyskanie kafelka o wartości 2048.
+7. **Memory Snake 🐍🧠** – Gra typu memory, w której odkrywasz karty z motywami wężowymi, aby znaleźć pary. Celem jest odkrycie wszystkich par kart.
+8. **Snake Pong 🐍🏓** – Wężowa wersja gry Pong: sterujesz paletką, odbijając małego węża.
+9. **Snake Sudoku 🐍🔢** – Sudoku z wężowymi akcentami: pola planszy są stylizowane na łuski węża, a liczby są jego ukrytymi wzorami. Celem jest rozwiązanie sudoku, unikając błędów, które mogą rozdrażnić węża.
 
 ## ⚙️ Instrukcja Uruchamiania ⚙️
 
