@@ -130,7 +130,7 @@ class Canvas(QWidget):
                     self.show_powerup = False
 
     def activatePowerup(self):
-        self.paddle_speed = 30
+        self.paddle_speed = 40
         self.powerup_active = True
         self.powerup_timer.start(5000)
 
@@ -178,7 +178,7 @@ class Canvas(QWidget):
             qp.drawText(self.rect(), Qt.AlignCenter, countdown_text)
 
         if self.show_powerup:
-            qp.setBrush(QColor(255, 0, 255))
+            qp.setBrush(QColor(0, 0, 255))
             qp.drawEllipse(self.powerup_x, self.powerup_y, 20, 20)
 
     def update(self):
