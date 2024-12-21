@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDe
 from PyQt5.QtGui import QPainter, QColor, QFont, QKeyEvent, QPixmap
 from PyQt5.QtCore import Qt, QTimer, QRect
 from PyQt5.QtMultimedia import QSound
+import random
 
 class PongGame(QMainWindow):
     def __init__(self):
@@ -65,6 +66,12 @@ class Canvas(QWidget):
         self.keys = set()
         self.game_started = False
         self.countdown = 3
+        self.powerup_active = False
+        self.powerup_timer = QTimer(self)
+        self.powerup_timer.timeout.connect(self.deactivatePowerup)
+        self.powerup_x = random.randint(200, 600)
+        self.powerup_y = random.randint(100, 500)
+        self.show_powerup = True
 
         self.start_timer = QTimer(self)
         self.start_timer.timeout.connect(self.updateCountdown)
@@ -117,11 +124,29 @@ class Canvas(QWidget):
                 self.score1 += 1
                 self.initBallPosition()
 
+            if self.show_powerup:
+                if self.powerup_x < self.ball_x < self.powerup_x + 20 and self.powerup_y < self.ball_y < self.powerup_y + 20:
+                    self.activatePowerup()
+                    self.show_powerup = False
+
+    def activatePowerup(self):
+        self.paddle_speed = 40
+        self.powerup_active = True
+        self.powerup_timer.start(5000)
+
+    def deactivatePowerup(self):
+        self.paddle_speed = 20
+        self.powerup_active = False
+        self.powerup_timer.stop()
+
     def initBallPosition(self):
         self.ball_x = 380
         self.ball_y = 280
         self.ball_dx = 5
         self.ball_dy = 5
+        self.show_powerup = True
+        self.powerup_x = random.randint(200, 600)
+        self.powerup_y = random.randint(100, 500)
 
     def paintEvent(self, event):
         qp = QPainter()
@@ -151,6 +176,10 @@ class Canvas(QWidget):
             qp.setPen(QColor(255, 255, 0))
             qp.setFont(QFont("Arial", 40, QFont.Bold))
             qp.drawText(self.rect(), Qt.AlignCenter, countdown_text)
+
+        if self.show_powerup:
+            qp.setBrush(QColor(0, 0, 255))
+            qp.drawEllipse(self.powerup_x, self.powerup_y, 20, 20)
 
     def update(self):
         self.movePaddles()
