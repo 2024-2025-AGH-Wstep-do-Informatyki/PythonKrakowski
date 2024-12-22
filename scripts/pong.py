@@ -6,7 +6,7 @@ from PyQt5.QtMultimedia import QSound
 import random
 
 class PongGame(QMainWindow):
-    def __init__(self):
+    def __init__(self, hub_window):
         super().__init__()
         self.initUI()
 

@@ -12,7 +12,7 @@ class Game2048(QMainWindow):
     def __init__(self, hub_window):
         super().__init__()
         self.hub_window = hub_window
-        self.setWindowTitle("2048 - Wężowy Motyw")
+        self.setWindowTitle("2048")
         self.grid = [[0] * GRID_SIZE for _ in range(GRID_SIZE)]
         self.initUI()
 
