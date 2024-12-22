@@ -13,7 +13,7 @@ class MemoryGame(QMainWindow):
     def __init__(self, hub_window):
         super().__init__()
         self.hub_window = hub_window
-        self.setWindowTitle("Gra Memory - Wężowy Motyw")
+        self.setWindowTitle("Gra Memory")
         self.setStyleSheet("background-color: #2E8B57;")
         self.grid = []
         self.first_card = None

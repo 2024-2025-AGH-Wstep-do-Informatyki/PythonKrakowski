@@ -5,12 +5,12 @@ import random
 import sys
 
 class SudokuGame(QMainWindow):
-    def __init__(self, return_to_hub_callback):
+    def __init__(self, hub_window):
         super().__init__()
         self.setWindowTitle("Sudoku")
         self.setGeometry(200, 200, 600, 700)
 
-        self.return_to_hub_callback = return_to_hub_callback
+        self.hub_window = hub_window
         self.board = generate_sudoku()
         self.solved_board = [row[:] for row in self.board]  
         solve_sudoku(self.solved_board)  
@@ -59,6 +59,10 @@ class SudokuGame(QMainWindow):
 
         self.load_board()
 
+    def return_to_hub(self):
+        self.close()
+        self.hub_window.show()
+            
     def load_board(self):
         for i in range(9):
             for j in range(9):
@@ -123,11 +127,6 @@ class SudokuGame(QMainWindow):
                     else:
                         item.setBackground(QColor("white"))
 
-
-    def return_to_hub(self):
-        self.close()
-        self.return_to_hub_callback()
-
 def generate_sudoku():
     board = [[0 for _ in range(9)] for _ in range(9)]
     fill_diagonal_boxes(board)
@@ -179,11 +178,6 @@ def remove_numbers(board):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-
-    def return_to_hub_stub():
-        print("Returning to hub...")
-
-    window = SudokuGame(return_to_hub_stub)
+    window = SudokuGame(None)
     window.show()
-
     sys.exit(app.exec_())

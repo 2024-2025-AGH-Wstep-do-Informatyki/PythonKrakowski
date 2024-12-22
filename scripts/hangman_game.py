@@ -11,9 +11,9 @@ class HangmanGame(QWidget):
         self.hub_window = hub_window
         self.setWindowTitle("Wisielec")
         self.setFixedSize(500, 500)
-        self.setWindowIcon(QIcon(".\assets\icon_pic.jpg"))
+        self.setWindowIcon(QIcon(r".\assets\icon_pic.jpg"))
 
-        with open(".\assets\hangman\wisielec_slowa.txt", "r", encoding="utf-8") as file:
+        with open(r".\assets\hangman\wisielec_slowa.txt", "r", encoding="utf-8") as file:
             self.word_list = [line.strip() for line in file]
         
         self.image_label = QLabel(self)
