@@ -15,7 +15,7 @@ from scripts.pong import PongGame
 class GameHub(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("GameHub")
+        self.setWindowTitle("🐍PyHub")
         self.setWindowIcon(QIcon("./assets/icon_pic.jpg"))
         
         self.setStyleSheet("background-color: black;") 
