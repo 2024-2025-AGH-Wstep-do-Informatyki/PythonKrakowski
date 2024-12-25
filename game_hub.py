@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QSpacerItem, QSizePolicy, QHBoxLayout
+from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QSpacerItem, QSizePolicy, QHBoxLayout
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import Qt
 import sys
@@ -11,6 +11,7 @@ from scripts.game2048 import Game2048
 from scripts.memory import MemoryGame
 from scripts.sudoku import SudokuGame
 from scripts.pong import PongGame
+from scripts.lab import LabirynthGame, ModeSelectionDialog
 
 class GameHub(QMainWindow):
     def __init__(self):
@@ -44,6 +45,7 @@ class GameHub(QMainWindow):
             ("2048 Game", Game2048),
             ("Sudoku Game", SudokuGame),
             ("Pong Game", PongGame),
+            ("Labirynth Game", LabirynthGame),
         ]
 
         for game_name, game_class in self.games:
@@ -75,12 +77,21 @@ class GameHub(QMainWindow):
         return button
 
     def open_game(self, game_class):
-        self.current_game = game_class(self)
-        self.current_game.show()
-        self.hide()
+        if game_class == LabirynthGame:
+            mode_dialog = ModeSelectionDialog(self)
+            if mode_dialog.exec_() == QDialog.Accepted:
+                game_mode = mode_dialog.selected_mode()
+                self.current_game = LabirynthGame(game_mode, self)
+                self.current_game.show()
+                self.hide()
+        else:
+            self.current_game = game_class(self)
+            self.current_game.show()
+            self.hide()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = GameHub()
-    window.show()
+    hub = GameHub()
+    hub.show()
     sys.exit(app.exec_())
