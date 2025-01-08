@@ -1,5 +1,5 @@
 import sys
-import random
+from random import randint
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtGui import QPainter, QBrush, QColor, QIcon
 from PyQt5.QtCore import Qt, QTimer
@@ -30,8 +30,8 @@ class SnakeGame(QMainWindow):
         self.setFocusPolicy(Qt.StrongFocus)
 
     def place_food(self):
-        x = random.randint(0, 39) * 10
-        y = random.randint(0, 39) * 10
+        x = randint(0, 39) * 10
+        y = randint(0, 39) * 10
         self.food = (x, y)
 
     def paintEvent(self, event):
