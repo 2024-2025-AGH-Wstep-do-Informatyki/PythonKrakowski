@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt, QTimer, QPointF, QPropertyAnimation, QRect
 from PyQt5.QtGui import QPainter, QColor, QPen, QFont
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
 
+#klasa reprezentujaca jeden fajerwerk, ktory wybucha i generuje kolorowe czastki, ktore rozchodza sie w linie
 class Firework:
     def __init__(self, x, y):
         self.x = x
@@ -21,12 +22,13 @@ class Firework:
     def explode(self):
         self.exploded = True
         num_particles = random.randint(400, 500)  
-        for _ in range(num_particles):
+        for _ in range(num_particles):      #losowe okrelenie parametrow czasteczki - kat pod jakim "poleci", dlugosc, i czas zycia
             angle = random.uniform(0, 2 * math.pi)
             speed = random.uniform(15, 25) 
             life = random.randint(50, 150)
-            self.particles.append(Particle(self.x, self.y, angle, speed, life))
+            self.particles.append(Particle(self.x, self.y, angle, speed, life))     #dodanie czasteczki do listy wszytskich czastek
 
+#klasa reprezentujaca pojedyncza czasteczke
 class Particle:
     def __init__(self, x, y, angle, speed, life):
         self.x = x
@@ -46,6 +48,7 @@ class Particle:
 
     def update(self):
         if self.life > 0:
+            #jezeli czasteczka dalej zyje, to przemieszcza sie odpowiednio na podstawie swojej predkosci i kata tworzac kolorowa linie
             self.x += self.speed * 0.3 * math.cos(self.angle)
             self.y += self.speed * 0.3 * math.sin(self.angle)
             self.life -= 1
@@ -60,11 +63,11 @@ class Particle:
 class FireworkWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Neonowe Fajerwerki!")
+        self.setWindowTitle("😊😊😊")
         self.setGeometry(100, 100, 800, 600)
         self.fireworks = []
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update_fireworks)
+        self.timer.timeout.connect(self.update_fireworks)       #po zatrzymaniu timera wywoluje funkcje update_fireworks
         self.timer.start(30) 
 
         #uruchamianie wielu fajerwerków automatycznie co 300ms
@@ -82,9 +85,7 @@ class FireworkWindow(QWidget):
         self.animation = QPropertyAnimation(self, b"pos")
         self.animation.setDuration(1000)
         self.animation.setLoopCount(-1)
-        self.animation.setKeyValueAt(0, QPointF(400, 300))
-        #self.animation.setKeyValueAt(0.5, QPointF(400, 270))  
-        #self.animation.setKeyValueAt(1, QPointF(400, 300))    
+        self.animation.setKeyValueAt(0, QPointF(400, 300))  
 
     def paintEvent(self, event):
         painter = QPainter(self)
